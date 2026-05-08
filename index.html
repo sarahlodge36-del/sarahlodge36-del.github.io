@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The AI Frontier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #ff3333;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 48px;
+      margin: 0;
+    }
+    .hero-container {
+      position: relative;
+    }
+    .hero-image {
+      width: 100%;
+      display: block;
+    }
+    .welcome-text {
+      position: absolute;
+      bottom: 45%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Exo 2', sans-serif;
+      color: #ff0000;
+      font-size: 22px;
+      max-width: 700px;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+      width: 100%;
+      min-height: 80px;
+    }
+    .buttons {
+      margin: 40px auto;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px 20px;
+      padding: 15px 40px;
+      background-color: #ff3333;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 18px;
+      border-radius: 4px;
+    }
+    .btn:hover {
+      background-color: #cc0000;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .welcome-text {
+        font-size: 14px;
+        bottom: 40%;
+      }
+      .btn {
+        display: block;
+        margin: 10px auto;
+        width: 80%;
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>The AI Frontier</h1>
+    </div>
+    <div class="hero-container">
+        <img src="xgenfutbot.jpg" alt="XGENFUTBOT" class="hero-image">
+        <p class="welcome-text"></p>
+    </div>
+    <div class="buttons">
+        <a href="today.html" class="btn">AI Today</a>
+        <a href="tomorrow.html" class="btn">AI Tomorrow</a>
+    </div>
+    <script>
+      const text = "Welcome. I am XGENFUTBOT. Your guide to the AI Frontier. Step forward — the adventure begins.";
+      const element = document.querySelector('.welcome-text');
+      element.textContent = '';
+      let i = 0;
+
+      function typeWriter() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+
+      function speak() {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.8;
+        utterance.pitch = 0.5;
+        utterance.volume = 1;
+        window.speechSynthesis.speak(utterance);
+      }
+
+      window.onload = function() {
+        typeWriter();
+        speak();
+      }
+    </script>
+</body>
+</html>

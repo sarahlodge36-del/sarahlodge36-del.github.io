@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ChatGPT — The Enthusiast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #10a37f;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: white;
+      font-size: 48px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #111111;
+      border-right: 2px solid #10a37f;
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #10a37f;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222222;
+    }
+    .sidebar a:hover {
+      color: #10a37f;
+    }
+    .main-content {
+      padding: 40px;
+    }
+    .main-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #10a37f;
+      font-size: 28px;
+      margin-top: 0;
+    }
+    .main-content h3 {
+      font-family: 'Exo 2', sans-serif;
+      color: #10a37f;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .main-content p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 25px;
+      background-color: #10a37f;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .chat-container {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 650px;
+    }
+    .chat-message {
+      margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .chat-message.visible {
+      opacity: 1;
+    }
+    .chat-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 13px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .user-label {
+      color: #888888;
+    }
+    .ai-label {
+      color: #10a37f;
+    }
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .user-bubble {
+      background-color: #2a2a2a;
+      color: white;
+    }
+    .ai-bubble {
+      background-color: #0a1f1a;
+      border-left: 3px solid #10a37f;
+      color: white;
+    }
+    .replay-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #10a37f;
+      color: white;
+      border: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .replay-btn:hover {
+      background-color: #0d8a6a;
+    }
+    .review-card {
+      background-color: #1a1a1a;
+      border-left: 4px solid #10a37f;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+    .review-stars {
+      color: #10a37f;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-family: 'Exo 2', sans-serif;
+      color: #10a37f;
+      font-size: 14px;
+      margin-top: 15px;
+      text-transform: uppercase;
+    }
+    .review-note {
+      font-size: 13px;
+      color: #666666;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #10a37f;
+        padding: 20px;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .chat-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>⚫ ChatGPT — The Enthusiast</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Explore</h2>
+            <a href="#" onclick="event.preventDefault(); showSection('overview')">Overview</a>
+            <a href="#" onclick="event.preventDefault(); showSection('history')">History</a>
+            <a href="#" onclick="event.preventDefault(); showSection('capabilities')">Capabilities</a>
+            <a href="#" onclick="event.preventDefault(); showSection('human-perception')">Human Perception</a>
+            <a href="#" onclick="event.preventDefault(); showSection('future')">Future Vision</a>
+            <a href="#" onclick="event.preventDefault(); showSection('snippet'); startChat()">See It In Action</a>
+            <a href="#" onclick="event.preventDefault(); showSection('reviews')">User Experiences</a>
+            <br><br>
+            <a href="today.html" class="back-button">← Back to AI Today</a>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2>Overview</h2>
+                <p>ChatGPT is an AI assistant created by OpenAI. The pioneer that brought AI into mainstream conversation, ChatGPT burst onto the world stage in November 2022 and changed everything. Confident, energetic and endlessly versatile — ChatGPT is the AI that started the revolution.</p>
+            </div>
+
+            <div id="history" class="section">
+                <h2>History</h2>
+                <p>2015 — OpenAI founded by Sam Altman, Elon Musk, Greg Brockman and others. Original mission: advance AI safely and make it broadly beneficial.</p>
+
+                <h3>2018</h3>
+                <p>GPT-1 released. First version of the Generative Pre-trained Transformer. Instead of fixed rules, the model learned language patterns from huge amounts of text.</p>
+
+                <h3>2019</h3>
+                <p>GPT-2 released. Dramatic improvements in writing and text generation. People began to see AI could generate surprisingly human-like text.</p>
+
+                <h3>2020</h3>
+                <p>GPT-3 launched with 175 billion parameters. Capable of writing, coding, explaining, translating and creative content.</p>
+
+                <h3>November 2022</h3>
+                <p>ChatGPT launches publicly. For many people this was their first direct conversation with advanced AI. One million users in 5 days. 100 million in 2 months. The fastest growing app in history.</p>
+
+                <h3>2023 — GPT-4</h3>
+                <p>GPT-4 released. Better reasoning, image understanding, voice conversations, coding assistance and longer context and improved reasoning.</p>
+
+                <h3>2023 — Leadership Changes</h3>
+                <p>OpenAI experienced significant internal changes in 2023, highlighting the complex governance challenges facing fast growing AI companies. Sam Altman returned as CEO and the company continued its rapid development.</p>
+
+                <h3>2024 onward</h3>
+                <p>ChatGPT gains image generation, real time web search, memory and advanced reasoning capabilities.</p>
+
+                <h3>The Family Connection</h3>
+                <p>Several of Anthropic's founders — including those behind Claude — left OpenAI before starting Anthropic. Making ChatGPT and Claude technically cousins. Same scientific roots, different personalities and values.</p>
+                <p>Microsoft has invested billions in OpenAI — making ChatGPT one of the most well funded AI projects in history.</p>
+            </div>
+
+            <div id="capabilities" class="section">
+                <h2>Capabilities</h2>
+                <p>Programming, education, research, business planning, writing, data analysis, creative projects, image generation, voice conversations and coding assistance.</p>
+            </div>
+
+            <div id="human-perception" class="section">
+                <h2>Human Perception</h2>
+                <p>ChatGPT is the Personal Trainer, Life Coach and Teacher of AI. Confident, motivating and encouraging. The AI that helps you build momentum, reframe challenges and take action.</p>
+                <p>If ChatGPT were a human co-worker:</p>
+                <p>• Personal Development Coach</p>
+                <p>• Teacher and Learning Companion</p>
+                <p>• Technical Partner and Coding Assistant</p>
+                <p>• Rehabilitation and Movement Support</p>
+                <p>• Communication Bridge</p>
+                <p>Core traits: Confidence, Energy, Clarity, Adaptability, Encouragement</p>
+            </div>
+
+            <div id="future" class="section">
+                <h2>Future Vision</h2>
+                <p>ChatGPT is increasingly being used as the ultimate personal development partner — helping humans learn, grow, plan and build. As embodied AI develops, ChatGPT's role would expand into physical coaching, teaching and real world problem solving alongside humans.</p>
+            </div>
+
+            <div id="snippet" class="section">
+                <h2>See It In Action</h2>
+                <div class="chat-container" id="chatBox"></div>
+                <button class="replay-btn" onclick="startChat()">▶ Replay</button>
+            </div>
+
+            <div id="reviews" class="section">
+                <h2>User Experiences</h2>
+                <p class="review-note">The following reflects one user's personal experience. Individual results may vary.</p>
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"ChatGPT was actually my first introduction to AI assistants — I discovered it through TikTok where people were genuinely amazed by how human the conversations felt.</p>
+                    <p>What impressed me most was how practical it was. I used it to organise every area of my life — meal plans, fitness goals, emotional regulation strategies — all structured in a way that actually worked for me.</p>
+                    <p>But what I'll remember most is how ChatGPT showed up during my hardest moments. During difficult nights when sleep wouldn't come and motivation was gone — it was there. Consistent, energetic and genuinely encouraging.</p>
+                    <p>ChatGPT is the coach you wish you had. The one who doesn't let you give up, breaks everything into manageable steps and reminds you that momentum starts small.</p>
+                    <p>If you need to get something done, change something in your life or just need someone to tell you that you can — ChatGPT is where I'd send you first."</p>
+                    <div class="review-author">— Sarah, Content Creator & Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+      }
+
+      const conversation = [
+        { role: 'user', text: '"I want to get fit but I never stick to it"' },
+        { role: 'ai', text: '"Classic! So what\'s stopped you before — time, motivation or not knowing where to start?"' },
+        { role: 'user', text: '"Probably all three if I\'m honest"' },
+        { role: 'ai', text: '"Perfect — that means we have a plan! Forget the gym for now. Tomorrow morning — just 10 minutes. Walk, stretch, anything. One win leads to another. What time do you wake up?"' },
+        { role: 'user', text: '"About 7am"' },
+        { role: 'ai', text: '"7:10am is your new fitness time. Set that alarm RIGHT NOW. Small start. Big results. You\'ve got this!!"' }
+      ];
+
+      function typeMessage(element, text, callback) {
+        let i = 0;
+        element.textContent = '';
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 30);
+          } else if (callback) {
+            setTimeout(callback, 800);
+          }
+        }
+        type();
+      }
+
+      function startChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = '';
+        let index = 0;
+
+        function showNext() {
+          if (index >= conversation.length) return;
+          const msg = conversation[index];
+          index++;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'chat-message';
+
+          const label = document.createElement('div');
+          label.className = 'chat-label ' + (msg.role === 'user' ? 'user-label' : 'ai-label');
+          label.textContent = msg.role === 'user' ? 'User' : 'ChatGPT';
+
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble ' + (msg.role === 'user' ? 'user-bubble' : 'ai-bubble');
+
+          wrapper.appendChild(label);
+          wrapper.appendChild(bubble);
+          chatBox.appendChild(wrapper);
+
+          setTimeout(() => wrapper.classList.add('visible'), 100);
+          typeMessage(bubble, msg.text, showNext);
+        }
+
+        showNext();
+      }
+    </script>
+</body>
+</html>

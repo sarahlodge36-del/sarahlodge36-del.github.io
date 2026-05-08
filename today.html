@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AI Today</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #ff3333;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 48px;
+      margin: 0;
+    }
+    h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: white;
+      font-size: 24px;
+    }
+    p {
+      font-family: 'Raleway', sans-serif;
+      color: white;
+      font-size: 16px;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: #1a1a1a;
+      border: 1px solid #ff3333;
+      border-radius: 8px;
+      padding: 30px;
+      text-decoration: none;
+      color: white;
+      display: block;
+    }
+    .card:hover {
+      background-color: #2a1a1a;
+      border-color: #ff6666;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 30px auto;
+      padding: 12px 30px;
+      background-color: #ff3333;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+      }
+      h1 {
+        font-size: 32px;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>AI Today</h1>
+    </div>
+    <p>Explore the AI tools that exist right now. Each one unique, each one powerful, each one changing the world in its own way.</p>
+    <div class="grid">
+        <a href="claude.html" class="card">
+            <h2>🟠 Claude</h2>
+            <p>Anthropic's AI assistant. Thoughtful, empathetic and safety focused.</p>
+        </a>
+        <a href="chatgpt.html" class="card">
+            <h2>⚫ ChatGPT</h2>
+            <p>OpenAI's pioneering AI assistant. Confident, energetic and versatile.</p>
+        </a>
+        <a href="dola.html" class="card">
+            <h2>🎨 Dola</h2>
+            <p>ByteDance's AI assistant and image generator. Creative, organised and practical.</p>
+        </a>
+        <a href="gemini.html" class="card">
+            <h2>🌈 Gemini</h2>
+            <p>Google's AI assistant. Powerful, integrated and constantly evolving.</p>
+        </a>
+    </div>
+    <a href="index.html" class="back-button">← Back to The AI Frontier</a>
+</body>
+</html>

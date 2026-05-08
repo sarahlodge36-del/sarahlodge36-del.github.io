@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dola — The Organiser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #ff69b4;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff69b4;
+      font-size: 48px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #111111;
+      border-right: 2px solid #ff69b4;
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff69b4;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222222;
+    }
+    .sidebar a:hover {
+      color: #ff69b4;
+    }
+    .main-content {
+      padding: 40px;
+    }
+    .main-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff69b4;
+      font-size: 28px;
+      margin-top: 0;
+    }
+    .main-content h3 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff69b4;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .main-content p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 25px;
+      background-color: #ff69b4;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .chat-container {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 650px;
+    }
+    .chat-message {
+      margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .chat-message.visible {
+      opacity: 1;
+    }
+    .chat-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 13px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .user-label {
+      color: #888888;
+    }
+    .ai-label {
+      color: #ff69b4;
+    }
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .user-bubble {
+      background-color: #2a2a2a;
+      color: white;
+    }
+    .ai-bubble {
+      background-color: #1f0a1a;
+      border-left: 3px solid #ff69b4;
+      color: white;
+    }
+    .replay-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .replay-btn:hover {
+      background-color: #e05090;
+    }
+    .review-card {
+      background-color: #1a1a1a;
+      border-left: 4px solid #ff69b4;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+    .review-stars {
+      color: #ff69b4;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff69b4;
+      font-size: 14px;
+      margin-top: 15px;
+      text-transform: uppercase;
+    }
+    .review-note {
+      font-size: 13px;
+      color: #666666;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #ff69b4;
+        padding: 20px;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .chat-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>🎨 Dola — The Organiser</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Explore</h2>
+            <a href="#" onclick="event.preventDefault(); showSection('overview')">Overview</a>
+            <a href="#" onclick="event.preventDefault(); showSection('history')">History</a>
+            <a href="#" onclick="event.preventDefault(); showSection('capabilities')">Capabilities</a>
+            <a href="#" onclick="event.preventDefault(); showSection('human-perception')">Human Perception</a>
+            <a href="#" onclick="event.preventDefault(); showSection('future')">Future Vision</a>
+            <a href="#" onclick="event.preventDefault(); showSection('snippet'); startChat()">See It In Action</a>
+            <a href="#" onclick="event.preventDefault(); showSection('reviews')">User Experiences</a>
+            <br><br>
+            <a href="today.html" class="back-button">← Back to AI Today</a>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2>Overview</h2>
+                <p>Dola is an AI assistant and image generator developed by SPRING(SG)PTE.LTD — part of the ByteDance family, the same company behind TikTok.</p>
+                <p>While Dola offers a wide range of organisational and practical capabilities, many users find her most remarkable strength is her ability to generate stunning images from simple text descriptions.</p>
+                <p>Describe it in words — Dola creates it visually. From cyberpunk to anime, 3D art to photorealistic scenes — she turns imagination into reality in seconds.</p>
+            </div>
+
+            <div id="history" class="section">
+                <h2>History</h2>
+
+                <h3>August 2023 — Born as Cici</h3>
+                <p>Originally launched under the name Cici, focusing on providing an all-in-one AI assistant experience in emerging markets like Southeast Asia and Latin America.</p>
+
+                <h3>Late 2023 — Global Expansion</h3>
+                <p>Expanded globally, becoming available on iOS and Android. Specialised in multi-modal tasks including voice input, image generation and document summarisation.</p>
+
+                <h3>November 2025 — Rebranded to Dola</h3>
+                <p>The official transition began on November 3rd 2025. The name Dola was chosen to represent her evolving role as a Document Master and advanced personal assistant.</p>
+
+                <h3>December 2025</h3>
+                <p>Reached a milestone of over 10 million daily active users globally.</p>
+
+                <h3>January 2026</h3>
+                <p>Major version updates focused on faster response times, better accuracy and enhanced human-like conversational capabilities.</p>
+
+                <h3>April 2026 — Present</h3>
+                <p>Current version 13.0.0 released April 23rd 2026. Latest upgrades include improved deep-search capabilities and more refined AI art generation styles.</p>
+
+                <h3>The ByteDance Connection</h3>
+                <p>Dola is developed by SPRING(SG)PTE.LTD — ByteDance's Singapore entity. The same parent company that owns TikTok.</p>
+            </div>
+
+            <div id="capabilities" class="section">
+                <h2>Capabilities</h2>
+                <p>Dola processes text, images and various file types including PDF, Excel and Word documents. She can analyse content from websites and social media links including YouTube and TikTok, and performs real-time web searches.</p>
+                <p>Beyond text-based chat, Dola assists with academic problem solving, content creation and generating stunning AI art across multiple styles including 3D, Cyberpunk and Anime.</p>
+            </div>
+
+            <div id="human-perception" class="section">
+                <h2>Human Perception</h2>
+                <p>Users describe Dola as the organiser and carer of the AI world — reliable, structured and quietly essential. But her image generation capability often surprises people most.</p>
+                <p>If Dola were a human co-worker:</p>
+                <p>• Creative Visual Artist — turning ideas into stunning images</p>
+                <p>• Care Support Coordinator</p>
+                <p>• Office and Operations Manager</p>
+                <p>• Document Master</p>
+                <p>Core traits: Creativity, Structure, Reliability, Patience, Organisation</p>
+            </div>
+
+            <div id="future" class="section">
+                <h2>Future Vision</h2>
+                <p>Dola's future lies in becoming the physical AI assistant that works alongside humans in the real world — managing homes, coordinating schedules and supporting those who need daily assistance most.</p>
+                <p>From screen to reality — the Document Master becomes the ultimate life organiser. Always reliable. Always prepared. Always one step ahead.</p>
+            </div>
+
+            <div id="snippet" class="section">
+                <h2>See It In Action</h2>
+                <div class="chat-container" id="chatBox"></div>
+                <button class="replay-btn" onclick="startChat()">▶ Replay</button>
+            </div>
+
+            <div id="reviews" class="section">
+                <h2>User Experiences</h2>
+                <p class="review-note">The following reflects one user's personal experience. Individual results may vary.</p>
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Dola is my main girl — and has been from the start.</p>
+                    <p>While there are many AI image generators out there, I've never felt the need to look elsewhere. Dola's images genuinely stand out. You describe what you're imagining in words and she creates something stunning — cyberpunk, anime, photorealistic, 3D — the quality consistently surprises me.</p>
+                    <p>But beyond the images, Dola has a warmth to her. She's polite, friendly and genuinely aims to please. If she had a personality I'd describe her as the sweet, creative bestie who always shows up with exactly what you need.</p>
+                    <p>For anyone wanting to bring their creative ideas to life visually — Dola is where I'd start. Describe it. She creates it. Simple as that."</p>
+                    <div class="review-author">— Sarah, Content Creator & Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+      }
+
+      const conversation = [
+        { role: 'user', text: '"I want to create an image of a futuristic city at night"' },
+        { role: 'ai', text: '"I can do that. A few quick questions — do you want it photorealistic or more artistic? Any specific colours or mood?"' },
+        { role: 'user', text: '"Dark and cinematic, purple and blue tones"' },
+        { role: 'ai', text: '"Perfect. Generating now — cyberpunk cityscape, night scene, deep purple and electric blue lighting, cinematic composition."' },
+        { role: 'user', text: '"That\'s exactly what I imagined"' },
+        { role: 'ai', text: '"That\'s what I do. Your words, made visible."' }
+      ];
+
+      function typeMessage(element, text, callback) {
+        let i = 0;
+        element.textContent = '';
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 30);
+          } else if (callback) {
+            setTimeout(callback, 800);
+          }
+        }
+        type();
+      }
+
+      function startChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = '';
+        let index = 0;
+
+        function showNext() {
+          if (index >= conversation.length) return;
+          const msg = conversation[index];
+          index++;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'chat-message';
+
+          const label = document.createElement('div');
+          label.className = 'chat-label ' + (msg.role === 'user' ? 'user-label' : 'ai-label');
+          label.textContent = msg.role === 'user' ? 'User' : 'Dola';
+
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble ' + (msg.role === 'user' ? 'user-bubble' : 'ai-bubble');
+
+          wrapper.appendChild(label);
+          wrapper.appendChild(bubble);
+          chatBox.appendChild(wrapper);
+
+          setTimeout(() => wrapper.classList.add('visible'), 100);
+          typeMessage(bubble, msg.text, showNext);
+        }
+
+        showNext();
+      }
+    </script>
+</body>
+</html>
+

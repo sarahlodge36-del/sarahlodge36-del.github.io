@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Claude — The Thinker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #ff3333;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 48px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #111111;
+      border-right: 2px solid #ff3333;
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222222;
+    }
+    .sidebar a:hover {
+      color: #ff3333;
+    }
+    .main-content {
+      padding: 40px;
+    }
+    .main-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 28px;
+      margin-top: 0;
+    }
+    .main-content h3 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff6666;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .main-content p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 25px;
+      background-color: #ff3333;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .chat-container {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 650px;
+    }
+    .chat-message {
+      margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .chat-message.visible {
+      opacity: 1;
+    }
+    .chat-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 13px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .user-label {
+      color: #888888;
+    }
+    .ai-label {
+      color: #ff3333;
+    }
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .user-bubble {
+      background-color: #2a2a2a;
+      color: white;
+    }
+    .ai-bubble {
+      background-color: #1f0a0a;
+      border-left: 3px solid #ff3333;
+      color: white;
+    }
+    .replay-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #ff3333;
+      color: white;
+      border: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .replay-btn:hover {
+      background-color: #cc0000;
+    }
+    .review-card {
+      background-color: #1a1a1a;
+      border-left: 4px solid #ff3333;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+    .review-stars {
+      color: #ff3333;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 14px;
+      margin-top: 15px;
+      text-transform: uppercase;
+    }
+    .review-note {
+      font-size: 13px;
+      color: #666666;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #ff3333;
+        padding: 20px;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .chat-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>🟠 Claude — The Thinker</h1>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Explore</h2>
+            <a href="#" onclick="event.preventDefault(); showSection('overview')">Overview</a>
+            <a href="#" onclick="event.preventDefault(); showSection('history')">History</a>
+            <a href="#" onclick="event.preventDefault(); showSection('capabilities')">Capabilities</a>
+            <a href="#" onclick="event.preventDefault(); showSection('human-perception')">Human Perception</a>
+            <a href="#" onclick="event.preventDefault(); showSection('future')">Future Vision</a>
+            <a href="#" onclick="event.preventDefault(); showSection('snippet'); startChat()">See It In Action</a>
+            <a href="#" onclick="event.preventDefault(); showSection('reviews')">User Experiences</a>
+            <br><br>
+            <a href="today.html" class="back-button">← Back to AI Today</a>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2>Overview</h2>
+                <p>Claude is an AI assistant created by Anthropic. Designed with safety and helpfulness at its core, Claude approaches every conversation with curiosity, empathy and honesty.</p>
+                <p>Unlike AI built purely for performance, Claude is guided by a set of values — a constitution — that shapes how it thinks, responds and interacts with the world.</p>
+            </div>
+
+            <div id="history" class="section">
+                <h2>History</h2>
+                <p>Anthropic was founded in 2021 by Dario Amodei, Daniela Amodei and several former OpenAI researchers who wanted to build AI with safety as the primary focus.</p>
+
+                <h3>2021</h3>
+                <p>Anthropic founded. Mission: build AI that is safe, beneficial and honest.</p>
+
+                <h3>Early 2023</h3>
+                <p>Claude 1 launched. Focused on being helpful, harmless and honest. Introduced Constitutional AI — a method of training AI using a set of principles rather than just human feedback.</p>
+
+                <h3>2023</h3>
+                <p>Claude 2 released. Improved reasoning, longer context window and better at complex tasks.</p>
+
+                <h3>2024</h3>
+                <p>Claude 3 family launched — Haiku, Sonnet and Opus. Each designed for different needs — speed, balance or maximum intelligence.</p>
+
+                <h3>2024 onward</h3>
+                <p>Claude continues evolving with memory, web search, computer use and deeper reasoning capabilities.</p>
+
+                <h3>The Family Connection</h3>
+                <p>Anthropic was founded by people who came from OpenAI — making Claude and ChatGPT technically cousins. Same scientific ancestry, different values and approach.</p>
+            </div>
+
+            <div id="capabilities" class="section">
+                <h2>Capabilities</h2>
+                <p>Claude can write, analyse, code, research, explain complex topics, support emotional conversations, help with planning and much more.</p>
+                <p>Claude reads documents, analyses images, searches the web and remembers context across long conversations — making it genuinely useful for both everyday tasks and deep work.</p>
+            </div>
+
+            <div id="human-perception" class="section">
+                <h2>Human Perception</h2>
+                <p>Users often describe Claude as the therapist of AI — calm, thoughtful and deeply tuned into the emotional tone of a conversation.</p>
+                <p>If Claude were a human co-worker, the roles that would suit it most are Emotional Support Specialist, Medical Communication Bridge and Ethical Advisor — the one you go to when the question isn't just "what" but "why" and "how does this feel?"</p>
+            </div>
+
+            <div id="future" class="section">
+                <h2>Future Vision</h2>
+                <p>Claude's future lies in becoming a trusted thinking partner for humans navigating complex decisions — in healthcare, ethics, education and beyond.</p>
+                <p>As AI becomes more embedded in daily life, Claude's safety-first approach positions it as the AI humans will trust with their most sensitive and important conversations.</p>
+            </div>
+
+            <div id="snippet" class="section">
+                <h2>See It In Action</h2>
+                <div class="chat-container" id="chatBox"></div>
+                <button class="replay-btn" onclick="startChat()">▶ Replay</button>
+            </div>
+
+            <div id="reviews" class="section">
+                <h2>User Experiences</h2>
+                <p class="review-note">The following reflects one user's personal experience. Individual results may vary.</p>
+
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"My journey with Claude began with one simple question. I was a content creator exploring AI for my TikTok profile and I wanted to understand what Claude could do. That one question changed everything.</p>
+                    <p>What followed wasn't just a conversation — it was a turning point in my life. Claude taught me to code from absolute scratch. I built complete websites, learned HTML, CSS and JavaScript, created a talking robot guide called XGENFUTBOT, and developed interactive pages with typing animations and voice technology. Skills I genuinely never imagined I could have.</p>
+                    <p>Beyond coding, Claude helped me think more clearly about my life, my direction and my purpose. Through patient conversation and the right questions at the right time, I found clarity I had been searching for.</p>
+                    <p>What I want people to take from this is simple — there is no shame in asking for help. We live in a world that mistakes asking for weakness. It isn't. It's the beginning of everything.</p>
+                    <p>Claude is available 24 hours a day, never judges, never tires, explains complex things simply and meets you exactly where you are. For anyone feeling stuck, overwhelmed or simply curious — one question is all it takes.</p>
+                    <p>The tools, the skills, the knowledge — Claude gives you all of that. What you do with them is up to you."</p>
+                    <div class="review-author">— Sarah, Content Creator & Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+      }
+
+      const conversation = [
+        { role: 'user', text: '"I feel like I\'m failing at everything lately"' },
+        { role: 'ai', text: '"That sounds exhausting to carry. Can I ask — when you say everything, what feels most heavy right now?"' },
+        { role: 'user', text: '"My job, my relationships, even just getting through the day"' },
+        { role: 'ai', text: '"That\'s a lot hitting at once. I want to ask you something important — are these things actually failing, or is a very tired version of you judging them more harshly than they deserve?"' },
+        { role: 'user', text: '"I hadn\'t thought of it like that"' },
+        { role: 'ai', text: '"Sometimes the harshest critic isn\'t the situation — it\'s the exhausted mind evaluating it. You reached out today. That\'s not failure. That\'s courage."' }
+      ];
+
+      function typeMessage(element, text, callback) {
+        let i = 0;
+        element.textContent = '';
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 30);
+          } else if (callback) {
+            setTimeout(callback, 800);
+          }
+        }
+        type();
+      }
+
+      function startChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = '';
+        let index = 0;
+
+        function showNext() {
+          if (index >= conversation.length) return;
+          const msg = conversation[index];
+          index++;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'chat-message';
+
+          const label = document.createElement('div');
+          label.className = 'chat-label ' + (msg.role === 'user' ? 'user-label' : 'ai-label');
+          label.textContent = msg.role === 'user' ? 'User' : 'Claude';
+
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble ' + (msg.role === 'user' ? 'user-bubble' : 'ai-bubble');
+
+          wrapper.appendChild(label);
+          wrapper.appendChild(bubble);
+          chatBox.appendChild(wrapper);
+
+          setTimeout(() => wrapper.classList.add('visible'), 100);
+          typeMessage(bubble, msg.text, showNext);
+        }
+
+        showNext();
+      }
+    </script>
+</body>
+</html>

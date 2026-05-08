@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AI Tomorrow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #ff3333;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 48px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #111111;
+      border-right: 2px solid #ff3333;
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222222;
+    }
+    .sidebar a:hover {
+      color: #ff3333;
+    }
+    .main-content {
+      padding: 40px;
+    }
+    .main-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff3333;
+      font-size: 28px;
+      margin-top: 0;
+    }
+    .main-content h3 {
+      font-family: 'Exo 2', sans-serif;
+      color: #ff6666;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .main-content p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 25px;
+      background-color: #ff3333;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #ff3333;
+        padding: 20px;
+      }
+      .main-content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>AI Tomorrow</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Explore</h2>
+            <a href="#" onclick="event.preventDefault(); showSection('overview')">Overview</a>
+            <a href="#" onclick="event.preventDefault(); showSection('agi')">AGI</a>
+            <a href="#" onclick="event.preventDefault(); showSection('embodied')">Embodied AI</a>
+            <a href="#" onclick="event.preventDefault(); showSection('bci')">Brain Computer Interface</a>
+            <a href="#" onclick="event.preventDefault(); showSection('medical')">Medical AI</a>
+            <a href="#" onclick="event.preventDefault(); showSection('climate')">Climate AI</a>
+            <a href="#" onclick="event.preventDefault(); showSection('collaboration')">Human-AI Collaboration</a>
+            <br><br>
+            <a href="index.html" class="back-button">← Back to Frontier</a>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2>The Future Begins Here</h2>
+                <p>We are living in the late evening of AI's story. The foundations have been built, the pioneers have spoken, the revolution has begun. But the most extraordinary chapters are still unwritten.</p>
+                <p>This is not science fiction. Everything explored here is based on real research, real predictions and real progress happening right now. The future of AI is not a question of if — only when.</p>
+                <p>Step forward. Explore what's coming. The adventure continues.</p>
+            </div>
+
+            <div id="agi" class="section">
+                <h2>AGI — Human Level Intelligence</h2>
+                <h3>What is it?</h3>
+                <p>Artificial General Intelligence — AI that can think, reason and learn across ANY domain at human level or beyond. Not just answering questions — genuinely understanding the world.</p>
+                <h3>When?</h3>
+                <p>CEOs of OpenAI, Google DeepMind and Anthropic all predict AGI arriving within the next 5 years. The most transformative technology in human history may be closer than we think.</p>
+                <h3>What changes?</h3>
+                <p>Everything. Medicine, science, education, creativity — every field accelerates beyond what we can currently imagine. AGI doesn't replace humans — it amplifies what humans can achieve.</p>
+            </div>
+
+            <div id="embodied" class="section">
+                <h2>Embodied AI — Robots in the Real World</h2>
+                <h3>What is it?</h3>
+                <p>AI leaving the screen and entering the physical world. Robots with intelligence — not just pre-programmed movements but genuine decision making in real environments.</p>
+                <h3>Who's building it?</h3>
+                <p>Tesla's Optimus, Figure AI and Boston Dynamics are already testing humanoid robots that navigate the real world using the same AI logic that powers our digital assistants.</p>
+                <h3>What changes?</h3>
+                <p>By 2030 physical AI assistants are projected to cost similar to a small car. Your home, your workplace, your daily life — all supported by AI that can see, move and act alongside you.</p>
+            </div>
+
+            <div id="bci" class="section">
+                <h2>Brain Computer Interface</h2>
+                <h3>What is it?</h3>
+                <p>Technology that reads the electrical signals your brain produces and translates them into actions. Your brain thinks — the computer responds. No keyboard. No voice. Just thought.</p>
+                <h3>Who's building it?</h3>
+                <p>Elon Musk's Neuralink is already testing this on humans. A paralysed man controlled a computer cursor just by thinking about it. That's not science fiction — that happened in 2024.</p>
+                <h3>What changes?</h3>
+                <p>For people who are paralysed, unable to speak or locked inside their own bodies — BCI is freedom. For everyone else — it's the ultimate human-AI connection. Think it. It happens.</p>
+            </div>
+
+            <div id="medical" class="section">
+                <h2>Medical AI</h2>
+                <h3>What is it?</h3>
+                <p>AI that diagnoses, predicts and prevents illness — often before symptoms appear. Virtual nursing assistants, smart wearables and AI that processes medical data at superhuman speed.</p>
+                <h3>Current progress?</h3>
+                <p>AI is already outperforming human doctors in certain diagnostic tasks — detecting cancer in scans, predicting heart attacks and identifying rare conditions from patterns in data.</p>
+                <h3>What changes?</h3>
+                <p>Healthcare becomes predictive rather than reactive. Instead of treating illness — AI helps prevent it. Every patient gets a personalised health partner available 24 hours a day.</p>
+            </div>
+
+            <div id="climate" class="section">
+                <h2>Climate AI</h2>
+                <h3>What is it?</h3>
+                <p>AI applied to the biggest challenge humanity faces — climate change. Processing environmental data, optimising energy systems and accelerating the development of sustainable solutions.</p>
+                <h3>Current progress?</h3>
+                <p>AI is already being used to optimise renewable energy grids, predict extreme weather events, monitor deforestation and design more efficient buildings and transport systems.</p>
+                <h3>What changes?</h3>
+                <p>The problems too complex for human minds alone become solvable. AI processes the data, finds the patterns and identifies the solutions — humans implement them. The planet's best chance.</p>
+            </div>
+
+            <div id="collaboration" class="section">
+                <h2>Human-AI Collaboration</h2>
+                <h3>What is it?</h3>
+                <p>Not AI replacing humans — AI working seamlessly alongside them. Each doing what they do best. Humans bring creativity, empathy, values and meaning. AI brings speed, data and endurance.</p>
+                <h3>What does it look like?</h3>
+                <p>A doctor and AI diagnosing together. A teacher and AI personalising education for every student. A coder and AI building faster than either could alone. Partners — not competitors.</p>
+                <h3>Why does it matter?</h3>
+                <p>The future isn't about who wins — humans or AI. It's about what becomes possible when both work together. The greatest achievements in human history are still ahead of us.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+      }
+    </script>
+</body>
+</html>
+

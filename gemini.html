@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gemini — The Visionary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      background-color: #0a0a0a;
+      padding: 20px;
+      border-bottom: 2px solid #4285f4;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      color: #4285f4;
+      font-size: 48px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background-color: #111111;
+      border-right: 2px solid #4285f4;
+      padding: 30px 20px;
+    }
+    .sidebar h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #4285f4;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      padding: 10px 0;
+      border-bottom: 1px solid #222222;
+    }
+    .sidebar a:hover {
+      color: #4285f4;
+    }
+    .main-content {
+      padding: 40px;
+    }
+    .main-content h2 {
+      font-family: 'Exo 2', sans-serif;
+      color: #4285f4;
+      font-size: 28px;
+      margin-top: 0;
+    }
+    .main-content h3 {
+      font-family: 'Exo 2', sans-serif;
+      color: #4285f4;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    .main-content p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .back-button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 25px;
+      background-color: #4285f4;
+      color: white;
+      text-decoration: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .chat-container {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 650px;
+    }
+    .chat-message {
+      margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .chat-message.visible {
+      opacity: 1;
+    }
+    .chat-label {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 13px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .user-label {
+      color: #888888;
+    }
+    .ai-label {
+      color: #4285f4;
+    }
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .user-bubble {
+      background-color: #2a2a2a;
+      color: white;
+    }
+    .ai-bubble {
+      background-color: #0a0f1f;
+      border-left: 3px solid #4285f4;
+      color: white;
+    }
+    .replay-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      font-family: 'Exo 2', sans-serif;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .replay-btn:hover {
+      background-color: #2d6fd4;
+    }
+    .review-card {
+      background-color: #1a1a1a;
+      border-left: 4px solid #4285f4;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+    .review-stars {
+      color: #4285f4;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-family: 'Exo 2', sans-serif;
+      color: #4285f4;
+      font-size: 14px;
+      margin-top: 15px;
+      text-transform: uppercase;
+    }
+    .review-note {
+      font-size: 13px;
+      color: #666666;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        border-right: none;
+        border-bottom: 2px solid #4285f4;
+        padding: 20px;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .chat-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>🌈 Gemini — The Visionary</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Explore</h2>
+            <a href="#" onclick="event.preventDefault(); showSection('overview')">Overview</a>
+            <a href="#" onclick="event.preventDefault(); showSection('history')">History</a>
+            <a href="#" onclick="event.preventDefault(); showSection('capabilities')">Capabilities</a>
+            <a href="#" onclick="event.preventDefault(); showSection('human-perception')">Human Perception</a>
+            <a href="#" onclick="event.preventDefault(); showSection('future')">Future Vision</a>
+            <a href="#" onclick="event.preventDefault(); showSection('snippet'); startChat()">See It In Action</a>
+            <a href="#" onclick="event.preventDefault(); showSection('reviews')">User Experiences</a>
+            <br><br>
+            <a href="today.html" class="back-button">← Back to AI Today</a>
+        </div>
+
+        <div class="main-content">
+            <div id="overview" class="section active">
+                <h2>Overview</h2>
+                <p>Gemini is Google's AI assistant — one of the most powerful and widely integrated AI systems in the world. Built by the company that literally organises the world's information, Gemini brings Google's decades of search, data and technology expertise into one intelligent assistant.</p>
+                <p>Not just another chatbot — Gemini is AI woven into the fabric of the tools billions of people already use every single day.</p>
+            </div>
+
+            <div id="history" class="section">
+                <h2>History</h2>
+
+                <h3>1998</h3>
+                <p>Google founded by Larry Page and Sergey Brin. Built on the mission to organise the world's information and make it universally accessible.</p>
+
+                <h3>2015 — DeepMind</h3>
+                <p>Google DeepMind established as one of the world's most respected AI research labs. Created AlphaGo — the AI that beat the world champion at the game of Go.</p>
+
+                <h3>2023 — Bard</h3>
+                <p>Google launches Bard as their first public AI assistant — a direct response to ChatGPT's explosive growth.</p>
+
+                <h3>December 2023 — Gemini Born</h3>
+                <p>Google announces Gemini — their most capable AI model yet. Bard is retired and Gemini takes its place as Google's flagship AI.</p>
+
+                <h3>2024 — Total Integration</h3>
+                <p>Gemini integrates across ALL Google products — Search, Gmail, Docs, Maps, YouTube and more.</p>
+
+                <h3>2024 onward</h3>
+                <p>Gemini becomes one of the most used AI tools globally — built into the devices and apps that run daily life.</p>
+            </div>
+
+            <div id="capabilities" class="section">
+                <h2>Capabilities</h2>
+                <p>Search, writing, coding, image generation, data analysis and deep integration with Gmail, Docs, Maps, YouTube and Google Search.</p>
+                <p>Available on Android devices by default — making Gemini the AI assistant most people already have in their pocket without realising it.</p>
+            </div>
+
+            <div id="human-perception" class="section">
+                <h2>Human Perception</h2>
+                <p>Users describe Gemini as the Researcher and Analyst of the AI world. Deeply knowledgeable, broadly connected and quietly powerful.</p>
+                <p>If Gemini were a human co-worker:</p>
+                <p>• Research Specialist</p>
+                <p>• Data Analyst</p>
+                <p>• Systems Integrator</p>
+                <p>• The one who knows where everything is</p>
+                <p>Core traits: Knowledge, Integration, Power, Breadth, Connectivity</p>
+            </div>
+
+            <div id="future" class="section">
+                <h2>Future Vision</h2>
+                <p>Gemini's future is total integration — AI woven invisibly into every Google product, every search, every device. Not a separate tool you open but an invisible intelligence running beneath everything you already do.</p>
+                <p>The vision: a world where you never have to think about using AI because it's already thinking alongside you.</p>
+            </div>
+
+            <div id="snippet" class="section">
+                <h2>See It In Action</h2>
+                <div class="chat-container" id="chatBox"></div>
+                <button class="replay-btn" onclick="startChat()">▶ Replay</button>
+            </div>
+
+            <div id="reviews" class="section">
+                <h2>User Experiences</h2>
+                <p class="review-note">The following reflects one user's personal experience. Individual results may vary.</p>
+                <div class="review-card">
+                    <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"I came to Gemini through Google — which is probably how most people find it, already built into the tools they use every day.</p>
+                    <p>What struck me most was how seamlessly it connects to everything. Ask it something and it doesn't just answer — it searches, synthesises and organises information in a way that feels genuinely intelligent rather than just fast.</p>
+                    <p>For research and understanding complex topics quickly, Gemini is remarkably thorough. It asks clarifying questions, breaks things into categories and always seems to know there's more to explore.</p>
+                    <p>If you're looking for an AI that connects the dots across everything you already use — Gemini is quietly one of the most powerful tools available."</p>
+                    <div class="review-author">— Sarah, Content Creator & Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+      }
+
+      const conversation = [
+        { role: 'user', text: '"I\'m trying to understand what\'s happening with AI right now"' },
+        { role: 'ai', text: '"Good question. Are you interested in the technical developments, the business landscape or the human impact?"' },
+        { role: 'user', text: '"All of it — I just feel like I\'m missing something important"' },
+        { role: 'ai', text: '"You\'re not missing it — it\'s moving fast. Let me break it down across three areas: what\'s happened in the last 6 months, what\'s coming in the next 2 years, and what it means for everyday life. Which would you like first?"' },
+        { role: 'user', text: '"Start with everyday life"' },
+        { role: 'ai', text: '"Smart choice. That\'s where it matters most. Here\'s what\'s already changed without most people noticing..."' }
+      ];
+
+      function typeMessage(element, text, callback) {
+        let i = 0;
+        element.textContent = '';
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 30);
+          } else if (callback) {
+            setTimeout(callback, 800);
+          }
+        }
+        type();
+      }
+
+      function startChat() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.innerHTML = '';
+        let index = 0;
+
+        function showNext() {
+          if (index >= conversation.length) return;
+          const msg = conversation[index];
+          index++;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'chat-message';
+
+          const label = document.createElement('div');
+          label.className = 'chat-label ' + (msg.role === 'user' ? 'user-label' : 'ai-label');
+          label.textContent = msg.role === 'user' ? 'User' : 'Gemini';
+
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble ' + (msg.role === 'user' ? 'user-bubble' : 'ai-bubble');
+
+          wrapper.appendChild(label);
+          wrapper.appendChild(bubble);
+          chatBox.appendChild(wrapper);
+
+          setTimeout(() => wrapper.classList.add('visible'), 100);
+          typeMessage(bubble, msg.text, showNext);
+        }
+
+        showNext();
+      }
+    </script>
+</body>
+</html>
+
